@@ -1,14 +1,27 @@
 const graphql = require('graphql')
 
-const {GraphQLObjectType, GrapgQLString, GraphQLSchema} = graphql
+const {GraphQLObjectType, GraphQLString, GraphQLSchema} = graphql
+
+
+//DUMMY DATA
+const BOOKS = [
+{id:"1", name:"Book one"},
+{id:"2", name:"Book two"},
+{id:"3", name:"Book three"}
+
+]
+
 
 const BookType = new GraphQLObjectType({
     name: 'Book',
-    fields:()=>{{
-            id:{type:GrapgQLString}
-            name:{type:GrapgQLString}
-            genre:{type:GrapgQLString}
-        }}
+    fields:()=>{
+        
+    return    {
+            id:{type:GraphQLString},
+            name:{type:GraphQLString},
+            genre:{type:GraphQLString}
+        }
+    }
 });
 
 const RootQuery = new GraphQLObjectType({
@@ -16,9 +29,11 @@ const RootQuery = new GraphQLObjectType({
     fields: {
         book:{
             type: BookType,
-            args: {id:{type:GrapgQLString}},
-            resolve(parent, args){
+            args: {id:{type:GraphQLString}},
+            resolve(_, args){
+
                 //logic for db
+                return BOOKS.find(book => book.id === args.id)
             }
         }
     }
