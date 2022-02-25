@@ -1,5 +1,15 @@
 const express = require('express')
 const app = express()
+const graphqlHTTP =  require('express-graphql')
+const schema = require('./schemas/schema')
+
+app.use('/graphql', graphqlHTTP({
+    schema
+}))
+
+
+
+
 
 const port = process.env.PORT || 5000
 
