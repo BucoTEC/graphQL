@@ -137,7 +137,7 @@ const Mutations = new GraphQLObjectType({
             resolve(parent,args){
                 let book = new Book({
                     name: args.name,
-                    gener: args.genre,
+                    genre: args.genre,
                     authorId: args.authorId
                 })
                 return book.save()
